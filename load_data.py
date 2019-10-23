@@ -12,7 +12,7 @@ data_path = os.path.join('dataset/omniglot/')
 train_folder = os.path.join(data_path,'images_train')
 valpath = os.path.join(data_path,'images_test')
 
-save_path = 'dataset/'
+save_path = 'dataset/omniglot'
 
 lang_dict = {}
 
@@ -59,10 +59,10 @@ def loadimgs(path,n=0):
 X,y,c=loadimgs(train_folder)
 
 
-with open(os.path.join(save_path,"train.pickle"), "wb") as f:
+with open(os.path.join(save_path,"pickle/train.pickle"), "wb") as f:
 	pickle.dump((X,c),f)
 
 
 X,y,c=loadimgs(valpath)
-with open(os.path.join(save_path,"val.pickle"), "wb") as f:
+with open(os.path.join(save_path,"pickle/val.pickle"), "wb") as f:
 	pickle.dump((X,c),f)
