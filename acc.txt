@@ -1,0 +1,13 @@
+x200
+epoch:
+10 - 46,8% (1000)(10_inv_omni_modelx200_hiragana_weights_1.h5)
+5 - 41,9% (1000)(5_inv_omni_modelx200_hiragana_weights_1.h5)
+4 - 35,2% (1000)(4_inv_omni_modelx200_hiragana_weights_1.h5)
+2 - 27,0% (1000)(2_inv_omni_modelx200_hiragana_weights_1.h5)
+
+x400
+epoch
+5 - 47,2% (1000)(5_inv_omni_modelx400_hiragana_weights_1.h5)
+4 - 
+3 - 
+2 - 35,6% (1000)(2_inv_omni_modelx400_hiragana_weights_1.h5)

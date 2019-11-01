@@ -3,6 +3,16 @@ from __future__ import generators, division, absolute_import, with_statement, pr
 import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
+import os
+import cv2
+import sys
+import h5py
+import pandas as pd
+import matplotlib.pyplot as plt
+import time
+import os
+from tqdm import tqdm_notebook
+from load_data import *
 
 class Dataset(object):
 	images_train = np.array([])
@@ -40,11 +50,52 @@ class Dataset(object):
 
 class MNISTDataset(Dataset):
 	def __init__(self):
-		print("===Loading MNIST Dataset===")
-		(self.images_train, self.labels_train), (self.images_test, self.labels_test) = mnist.load_data()
-		self.images_train = np.expand_dims(self.images_train, axis=3) / 255.0
-		self.images_test = np.expand_dims(self.images_test, axis=3) / 255.0
-		self.labels_train = np.expand_dims(self.labels_train, axis=1)
+	
+
+		data_path = os.path.join('dataset/omniglot')
+		train_folder = os.path.join(data_path,'images_train')
+		valpath = os.path.join(data_path,'images_test')
+		
+		with open(os.path.join(data_path, "pickle/train.pickle"), "rb") as f:
+			(X, classes) = pickle.load(f)
+
+		with open(os.path.join(data_path, "pickle/val.pickle"), "rb") as f:
+			(Xval, val_classes) = pickle.load(f)
+			
+		print("Training alphabets: \n")
+		print(list(classes.keys()))
+		print("Validation alphabets:", end="\n\n")
+		print(list(val_classes.keys()))
+		
+		x_train = []
+		y_train = []
+		x_test = []
+		y_test = []
+
+		target = 0
+		for classe in X:    
+			for img in classe:
+				x_train.append(255 - img)
+				y_train.append(target)
+			target += 1
+
+		target = 0
+		for classe in Xval:    
+			for img in classe:
+				x_test.append(255 - img)
+				y_test.append(target)
+			target += 1    
+			
+		x_imgs = np.asarray([np.asarray(x_train), np.asarray(x_test)])
+		y_lbls = np.asarray([np.asarray(y_train), np.asarray(y_test)])
+	
+	
+	
+		print("===Loading ひらがな　Dataset===")
+		#(self.images_train, self.labels_train), (self.images_test, self.labels_test) = mnist.load_data()
+		self.images_train = np.expand_dims(x_train, axis=3) / 255.0
+		self.images_test = np.expand_dims(x_test, axis=3) / 255.0
+		self.labels_train = np.expand_dims(y_train, axis=1)
 		self.unique_train_label = np.unique(self.labels_train)
 		self.map_train_label_indices = {label: np.flatnonzero(self.labels_train == label) for label in self.unique_train_label}
 		print("Images train :", self.images_train.shape)
