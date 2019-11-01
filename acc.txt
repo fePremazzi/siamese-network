@@ -11,3 +11,15 @@ epoch
 4 - 
 3 - 
 2 - 35,6% (1000)(2_inv_omni_modelx400_hiragana_weights_1.h5)
+
+x400(l2)
+epoch
+5 - 
+4 - 
+3 - 
+2 - 34,2% (1000)(2_inv_omni_modelx400_euclidean_hiragana_weights_1.h5)
+
+
+i
+40
+208
